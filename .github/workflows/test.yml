@@ -5,6 +5,7 @@ on:
   push:
     branches: [main]
     paths-ignore: ["**.md"]
+    tags-ignore: ["*"] # we run a test before release
   pull_request:
     paths-ignore: ["**.md"]
 

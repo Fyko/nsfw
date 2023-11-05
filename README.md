@@ -85,6 +85,13 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 - `png` - Enables PNG support for [`image`].
 - `webp` - Enables WEBP support for [`image`].
 
+## Benchmarking
+
+| Name          | Size                          | Language                                | Time             |
+| ------------- | ----------------------------- | --------------------------------------- | ---------------- |
+| test_porn.gif | `50495726` bytes (`50.49` MB) | [Rust](./src/gif.rs#L61)                | `22.719` seconds |
+| test_porn.gif | `50495726` bytes (`50.49` MB) | [JavaScript](./test/node/nsfw_bench.js) | `219.96` seconds |
+
 [crates.io]: https://img.shields.io/crates/v/nsfw.svg
 [Documentation]: https://docs.rs/nsfw/badge.svg
 [Build Status]: https://github.com/Fyko/nsfw/actions/workflows/ci.yml/badge.svg
