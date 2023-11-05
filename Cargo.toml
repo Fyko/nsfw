@@ -1,0 +1,36 @@
+[package]
+name = "nsfw"
+version = "0.1.0"
+description = "A Rust library for detecting NSFW images using a neural network."
+edition = "2021"
+homepage = "https://github.com/fyko/nsfw"
+repository = "https://github.com/fyko/nsfw"
+documentation = "https://docs.rs/nsfw"
+categories = ["science", "multimedia::images", "multimedia::video"]
+keywords = ["tensorflow", "tract", "onnx"]
+license = "MIT OR Apache-2.0"
+authors = ["Carter Himmel <carter@fyko.net>"]
+
+[dependencies]
+image = { version = "0.24.7", default-features = false }
+serde = { version = "1.0.190", optional = true, features = ["derive"] }
+tract-onnx = "0.20.21"
+once_cell = "1.18.0"
+
+[dev-dependencies]
+tokio = { version = "1.33.0", features = ["rt-multi-thread", "macros"] }
+serde_json = "1.0.108"
+
+[features]
+default = ["jpeg", "png"]
+serde = ["dep:serde"]
+gif = ["image/gif"]
+jpeg = ["image/jpeg"]
+png = ["image/png"]
+webp = ["image/webp"]
+
+[profile.dev]
+opt-level = 3
+
+[profile.test]
+opt-level = 3

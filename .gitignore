@@ -1,0 +1,7 @@
+/target
+/Cargo.lock
+media
+model
+model.onnx
+*.zip
+node_modules

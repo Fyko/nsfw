@@ -1,0 +1,71 @@
+[env]
+CARGO_MAKE_EXTEND_WORKSPACE_MAKEFILE = true
+
+[config]
+default_to_workspace = false
+
+[tasks.setup]
+script = '''
+    echo # installing git hooks
+    pre-commit --version || pip install pre-commit
+    pre-commit install || echo "failed to install git hooks!" 1>&2
+
+    echo # things required to install things
+    cargo install cargo-binstall
+
+    echo # things required for `cargo make test`
+    cargo binstall -y cargo-nextest
+
+    echo # things required by `cargo make coverage`
+    rustup component add llvm-tools-preview
+    cargo binstall -y cargo-llvm-cov
+'''
+
+[tasks.lint]
+install_crate = "clippy"
+command = "cargo"
+args = ["clippy", "--tests", "--examples", "--all-targets", "--all-features"]
+
+[tasks.lint-ci]
+install_crate = "clippy"
+command = "cargo"
+args = [
+    "clippy",
+    "--tests",
+    "--examples",
+    "--all-targets",
+    "--all-features",
+    "--",
+    "-D",
+    "warnings",
+]
+
+[tasks.format]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--all"]
+
+[tasks.fmt]
+alias = "format"
+
+[tasks.format-ci]
+install_crate = "rustfmt"
+command = "cargo"
+args = ["fmt", "--all", "--", "--check"]
+
+[tasks.test]
+env = { "RUN_MODE" = "test", "RUST_LOG" = "info", "RUST_BACKTRACE" = 0 }
+command = "cargo"
+args = [
+    "nextest",
+    "run",
+    "--examples",
+    "--all-targets",
+    "--all-features",
+    "${@}",
+]
+
+[tasks.test-ci]
+env = { "RUN_MODE" = "ci", "RUST_LOG" = "info" }
+command = "cargo"
+args = ["nextest", "run", "--examples", "--all-targets", "--all-features"]

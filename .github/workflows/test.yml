@@ -1,0 +1,57 @@
+name: Tests
+
+on:
+  workflow_call:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md"]
+  pull_request:
+    paths-ignore: ["**.md"]
+
+env:
+  CARGO_TERM_COLOR: always
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+
+jobs:
+  create_model:
+    uses: ./.github/workflows/create_model.yml
+    secrets: inherit
+  suite:
+    name: Suite
+    needs: [create_model]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup problem matchers
+        uses: r7kamura/rust-problem-matchers@v1
+
+      - run: rustup toolchain install stable --profile minimal
+
+      - name: Setup Rust cache
+        uses: Swatinem/rust-cache@v2
+
+      - name: Install necessary tools
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-make,cargo-nextest
+
+      - name: Download model artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: model
+
+      - name: Run Rustfmt
+        run: cargo make format-ci
+
+      - name: Run Clippy
+        run: cargo make lint-ci
+
+      - name: Run tests
+        run: cargo make test
+
+      - name: Build release
+        run: cargo build --release --all-features

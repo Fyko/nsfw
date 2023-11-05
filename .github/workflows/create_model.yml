@@ -1,0 +1,30 @@
+name: Create Model
+
+on:
+  workflow_call:
+
+jobs:
+  create_model:
+    name: Create Model
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          pip3 install tensorflow tf2onnx onnx==1.14.1
+          pip3 uninstall -y protobuf
+          pip3 install protobuf
+
+      - name: Download model
+        run: |
+          wget https://github.com/GantMan/nsfw_model/releases/download/1.2.0/mobilenet_v2_140_224.1.zip
+          unzip mobilenet_v2_140_224.1.zip
+          mv mobilenet_v2_140_224 model
+
+      - name: Convert model to ONNX
+        run: python3 -m tf2onnx.convert --saved-model ./model --output ./model.onnx --opset 16
+
+      - name: Upload model as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: model
+          path: model.onnx
