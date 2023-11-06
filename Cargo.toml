@@ -1,6 +1,6 @@
 [package]
 name = "nsfw"
-version = "0.1.0"
+version = "0.1.1"
 description = "A Rust library for detecting NSFW images using a neural network."
 edition = "2021"
 homepage = "https://github.com/fyko/nsfw"
