@@ -32,7 +32,7 @@ image = { version = "0.24.7", default-features = false, features = ["jpeg"] }
 nsfw = { version = "0.1.0", default-features = false, features = ["jpeg"] }
 ```
 
-```rust,ignore
+```rust,no_test
 use nsfw::{create_model, examine};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -56,7 +56,7 @@ image = { version = "0.24.7", default-features = false, features = ["gif"] }
 nsfw = { version = "0.1.0", default-features = false, features = ["gif"] }
 ```
 
-```rust,ignore
+```rust,no_test
 use nsfw::{examine, MODEL, GifParser};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
