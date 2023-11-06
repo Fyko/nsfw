@@ -94,7 +94,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 [crates.io]: https://img.shields.io/crates/v/nsfw.svg
 [Documentation]: https://docs.rs/nsfw/badge.svg
-[Build Status]: https://github.com/Fyko/nsfw/actions/workflows/ci.yml/badge.svg
+[Build Status]: https://github.com/Fyko/nsfw/actions/workflows/test.yml/badge.svg
 [Discord]: https://img.shields.io/discord/1041931589631881257?color=5865F2&logo=discord&logoColor=white
 [GantMan's model]: https://github.com/GantMan/nsfw_model
 [the release page]: https://github.com/Fyko/nsfw/releases/latest
