@@ -13,7 +13,7 @@ authors = ["Carter Himmel <carter@fyko.net>"]
 
 [dependencies]
 image = { version = "0.24.7", default-features = false }
-serde = { version = "1.0.190", optional = true, features = ["derive"] }
+serde = { version = "1.0.192", optional = true, features = ["derive"] }
 tract-onnx = "0.20.21"
 once_cell = "1.18.0"
 
