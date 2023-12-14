@@ -24,7 +24,7 @@ jobs:
         run: python3 -m tf2onnx.convert --saved-model ./model --output ./model.onnx --opset 16
 
       - name: Upload model as artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: model
           path: model.onnx
