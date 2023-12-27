@@ -3,8 +3,8 @@
         "editor.defaultFormatter": "rust-lang.rust-analyzer"
     },
     "editor.codeActionsOnSave": {
-        "source.fixAll": true,
-        "source.organizeImports": false
+        "source.fixAll": "explicit",
+        "source.organizeImports": "never"
     },
     "editor.formatOnSave": true,
     "editor.trimAutoWhitespace": false,
