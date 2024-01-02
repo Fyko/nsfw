@@ -63,7 +63,7 @@ mod test {
         let file = BufReader::new(File::open(gif_path)?);
         let frames = GifParser::new(GifDecoder::new(file)?, &MODEL);
 
-        for (_index, frame) in frames.enumerate() {
+        for frame in frames {
             assert!(frame.is_ok());
         }
 
