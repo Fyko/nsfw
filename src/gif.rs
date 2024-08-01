@@ -1,4 +1,4 @@
-use std::io::Read;
+use std::io::{BufRead, Seek};
 
 use image::{codecs::gif::GifDecoder, AnimationDecoder};
 
@@ -28,7 +28,7 @@ pub struct GifParser<'a> {
 }
 
 impl<'a> GifParser<'a> {
-    pub fn new<R: Read + 'a>(gif: GifDecoder<R>, model: &'a Model) -> Self {
+    pub fn new<R: BufRead + Seek + 'a>(gif: GifDecoder<R>, model: &'a Model) -> Self {
         let frames = gif.into_frames();
 
         Self { frames, model }
